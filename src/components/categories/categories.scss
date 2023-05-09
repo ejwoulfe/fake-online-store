@@ -1,0 +1,23 @@
+@import "../../util/variables.scss";
+
+.categories {
+  display: flex;
+  flex-flow: row wrap;
+}
+.categories__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  height: 600px;
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: $main-font;
+  font-weight: 400;
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
