@@ -16,12 +16,12 @@ export default function Categories() {
       image: electronics,
     },
     {
-      name: "Women's Clothing",
-      image: womenClothing,
-    },
-    {
       name: "Men's Clothing",
       image: menClothing,
+    },
+    {
+      name: "Women's Clothing",
+      image: womenClothing,
     },
   ];
 
@@ -29,14 +29,14 @@ export default function Categories() {
     <div className="categories">
       {categoryData.map((category, index) => {
         return (
-          <span
+          <div
             className="categories__box"
             style={{
               background: `linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${category.image}) 50% 30% / cover no-repeat `,
             }}
             key={category.name + " shopping box"}>
-            {category.name}
-          </span>
+            <h3>{category.name}</h3>
+          </div>
         );
       })}
       {/* <span className="categories__box">Jewelry</span>
