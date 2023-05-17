@@ -1,12 +1,12 @@
 import "./navigation.scss";
-import shoppingBag from "../../assets/shopping-bag.png";
+import shoppingIcon from "../../assets/shopping-icon.png";
 import cartIcon from "../../assets/cart.png";
 
 export default function Navigation() {
   return (
     <nav>
       <div className="nav__logo">
-        <img src={shoppingBag} alt="shopping bag logo" />
+        <img src={shoppingIcon} alt="shopping bag logo" />
         <span>
           <p>Fake</p>
           <p>Online</p>
