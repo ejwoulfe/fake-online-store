@@ -23,13 +23,13 @@ export default function Navigation() {
             <Link to={`shop/electronics`}>Electronics</Link>
           </li>
           <li>
-            <Link to={`shop/men`}>Men's Clothing</Link>
+            <Link to={`shop/men's clothing`}>Men's Clothing</Link>
           </li>
           <li>
-            <Link to={`shop/women`}>Women's Clothing</Link>
+            <Link to={`shop/women's clothing`}>Women's Clothing</Link>
           </li>
           <li>
-            <Link to={`shop/jewelry`}>Jewelry</Link>
+            <Link to={`shop/jewelery`}>Jewelry</Link>
           </li>
         </ul>
       </div>
