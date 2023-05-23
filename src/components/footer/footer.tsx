@@ -20,7 +20,11 @@ export default function Footer() {
           <li>Jewelry</li>
         </ul>
       </div>
-      <div className="footer__social">
+      <div
+        className="footer__social"
+        onClick={() => {
+          alert("Unfortunately the social media links are fake :(");
+        }}>
         <span>
           <img src={facebook} alt="fake facebook link" />
         </span>
