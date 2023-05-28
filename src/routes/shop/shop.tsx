@@ -4,17 +4,22 @@ import { useEffect, useState } from "react";
 import Filter from "../../components/filter/filter";
 import Merchandise from "../../components/merchandise/merchandise";
 import capitalize from "../../helpers/capitalize";
-import FilterObject from "../../../interfaces/filter";
+import FilterOptions from "../../../interfaces/filter";
 import sortBy from "../../helpers/sortBy";
+import ShopItem from "../../../interfaces/shop-item";
 
 export default function Shop() {
   const { categoryName } = useParams();
-  const [filter, setFilter] = useState<FilterObject>({ reviews: null, priceRange: null });
+  const [filter, setFilter] = useState<FilterOptions>({ reviews: null, priceRange: null });
   const [sortOption, setSortOption] = useState(null);
-  const [shopList, setShopList] = useState();
-  const [filteredList, setFilteredList] = useState();
+  const [shopList, setShopList] = useState<Array<ShopItem> | null>(null);
+  const [filteredList, setFilteredList] = useState<Array<ShopItem> | null>(null);
+  useEffect(() => {
+    console.log(filter);
+  }, [filter]);
 
   useEffect(() => {
+    setFilteredList(null);
     if (categoryName === "all") {
       fetch("https://fakestoreapi.com/products")
         .then((res) => res.json())
@@ -36,9 +41,9 @@ export default function Shop() {
     <section className="shop-container">
       {categoryName !== undefined ? <h1>Browse {capitalize(categoryName)}</h1> : <h1>Shop</h1>}
       <aside>
-        <Filter />
+        <Filter filterOptions={{ filter, setFilter }} />
       </aside>
-      {filteredList !== undefined ? <Merchandise list={filteredList} /> : <h1>Loading</h1>}
+      {filteredList !== null ? <Merchandise list={filteredList} /> : <h1>Loading</h1>}
     </section>
   );
 }
