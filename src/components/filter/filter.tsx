@@ -41,10 +41,11 @@ export default function Filter(props: { filterOptions: FilterProps }) {
           className="filter__reviews"
           onClick={(e) => {
             let element = e.target as HTMLInputElement;
-            if (element !== null) {
+            const elementID = element.getAttribute("id");
+            if (elementID !== null) {
               props.filterOptions.setFilter({
                 ...props.filterOptions.filter,
-                reviews: parseInt(element.getAttribute("id").charAt(0)),
+                reviews: parseInt(elementID.charAt(0)),
               });
             }
           }}>

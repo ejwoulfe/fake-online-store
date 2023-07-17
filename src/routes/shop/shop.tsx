@@ -18,14 +18,14 @@ export default function Shop() {
   useEffect(() => {
     if (shopList !== null) {
       let tempList: Array<ShopItem> = [...shopList];
-      if (filter.priceRange !== null) {
-        tempList = tempList?.filter(
-          (shopItem) => shopItem.price >= filter.priceRange.min && shopItem.price <= filter.priceRange.max
-        );
+      const priceRange = filter.priceRange;
+      const reviewsNum = filter.reviews;
+      if (priceRange !== null) {
+        tempList = tempList?.filter((shopItem) => shopItem.price >= priceRange.min && shopItem.price <= priceRange.max);
       }
 
-      if (filter.reviews !== null) {
-        tempList = tempList?.filter((shopItem) => shopItem.rating.rate >= filter.reviews);
+      if (reviewsNum !== null) {
+        tempList = tempList?.filter((shopItem) => shopItem.rating.rate >= reviewsNum);
       }
       setFilteredList(tempList);
     }
