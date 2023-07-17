@@ -14,12 +14,26 @@ export default function Shop() {
   const [sortOption, setSortOption] = useState(null);
   const [shopList, setShopList] = useState<Array<ShopItem> | null>(null);
   const [filteredList, setFilteredList] = useState<Array<ShopItem> | null>(null);
+
   useEffect(() => {
-    console.log(filter);
-  }, [filter]);
+    if (shopList !== null) {
+      let tempList: Array<ShopItem> = [...shopList];
+      if (filter.priceRange !== null) {
+        tempList = tempList?.filter(
+          (shopItem) => shopItem.price >= filter.priceRange.min && shopItem.price <= filter.priceRange.max
+        );
+      }
+
+      if (filter.reviews !== null) {
+        tempList = tempList?.filter((shopItem) => shopItem.rating.rate >= filter.reviews);
+      }
+      setFilteredList(tempList);
+    }
+  }, [filter, shopList]);
 
   useEffect(() => {
     setFilteredList(null);
+
     if (categoryName === "all") {
       fetch("https://fakestoreapi.com/products")
         .then((res) => res.json())
