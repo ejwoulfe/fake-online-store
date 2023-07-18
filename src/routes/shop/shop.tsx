@@ -7,17 +7,19 @@ import capitalize from "../../helpers/capitalize";
 import FilterOptions from "../../../interfaces/filter";
 import sortBy from "../../helpers/sortBy";
 import ShopItem from "../../../interfaces/shop-item";
+import SortBy from "../../components/sort-by/sort-by";
 
 export default function Shop() {
   const { categoryName } = useParams();
   const [filter, setFilter] = useState<FilterOptions>({ reviews: null, priceRange: null });
-  const [sortOption, setSortOption] = useState(null);
-  const [shopList, setShopList] = useState<Array<ShopItem> | null>(null);
+  const [sort, setSort] = useState<string | null>(null);
+  const [shopList, setShopList] = useState<Array<ShopItem>>();
   const [filteredList, setFilteredList] = useState<Array<ShopItem> | null>(null);
 
   useEffect(() => {
-    if (shopList !== null) {
+    if (shopList !== undefined) {
       let tempList: Array<ShopItem> = [...shopList];
+      let newList: Array<ShopItem> = [];
       const priceRange = filter.priceRange;
       const reviewsNum = filter.reviews;
       if (priceRange !== null) {
@@ -27,9 +29,25 @@ export default function Shop() {
       if (reviewsNum !== null) {
         tempList = tempList?.filter((shopItem) => shopItem.rating.rate >= reviewsNum);
       }
-      setFilteredList(tempList);
+
+      switch (sort) {
+        case "Alphabetical":
+          newList = tempList.sort((a, b) => (a.title > b.title ? 1 : -1));
+          break;
+        case "Price":
+          newList = tempList.sort((a, b) => a.price - b.price);
+          break;
+        case "Rating":
+          newList = tempList.sort((a, b) => a.rating.rate - b.rating.rate);
+
+          break;
+        default:
+          newList = tempList;
+          break;
+      }
+      setFilteredList(newList);
     }
-  }, [filter, shopList]);
+  }, [filter, sort]);
 
   useEffect(() => {
     setFilteredList(null);
@@ -51,9 +69,15 @@ export default function Shop() {
     }
   }, [categoryName]);
 
+  useEffect(() => {
+    setFilter({ reviews: null, priceRange: null });
+    setSort(null);
+  }, [shopList]);
+
   return (
-    <section className="shop-container">
+    <section className="shop__container">
       {categoryName !== undefined ? <h1>Browse {capitalize(categoryName)}</h1> : <h1>Shop</h1>}
+      <SortBy sortOptions={{ sort, setSort }} />
       <aside>
         <Filter filterOptions={{ filter, setFilter }} />
       </aside>
