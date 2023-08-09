@@ -2,8 +2,6 @@ import "./navigation.scss";
 import shoppingIcon from "../../assets/shopping-icon.png";
 import cartIcon from "../../assets/cart.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import LoginModal from "../login-modal/login-modal";
 
 interface NavigationProps {
   setModalState: React.Dispatch<React.SetStateAction<boolean>>;
