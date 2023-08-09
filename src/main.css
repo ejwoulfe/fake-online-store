@@ -8,4 +8,9 @@ body {
   margin: 0 auto;
   padding: 0;
   text-align: center;
+  position: relative;
+}
+.ReactModal__Overlay {
+  z-index: 999;
+  background-color: rgb(114 114 114 / 75%) !important;
 }
